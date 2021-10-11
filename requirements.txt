@@ -1,4 +1,4 @@
-emmental
+git+git://github.com/senwu/emmental.git@a7c2f8c1be64ef69b3ffe7d195405c47f5e22dfc
 imageio
 opencv-python
 jupyter
@@ -7,8 +7,12 @@ numpy
 progress
 pydicom
 scikit-learn==0.22.2.post1
+scikit-image
 tqdm
 torch==1.4.0
 torchvision
 umap-learn
 yapf
+
+
+
