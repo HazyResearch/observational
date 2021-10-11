@@ -1,0 +1,14 @@
+emmental
+imageio
+opencv-python
+jupyter
+matplotlib
+numpy
+progress
+pydicom
+scikit-learn==0.22.2.post1
+tqdm
+torch==1.4.0
+torchvision
+umap-learn
+yapf
