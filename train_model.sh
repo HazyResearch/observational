@@ -1,8 +1,7 @@
 
-cd ..
 
-SOURCE=mets
-TASK=gaze_mtl
+SOURCE=cxr
+TASK=original
 
 DATA_DIR=/home/ksaab/Documents/observational/data
 if [ $SOURCE == "mets" ]; then
@@ -29,12 +28,12 @@ fi
 
 
 if [ $TASK == "gaze_mtl" ]; then
-    LOG_PTH=/media/nvme_data/observational_miccai_07_2021/$TASK/$SOURCE/$gaze_mtl_task
+    LOG_PTH=/home/ksaab/Documents/observational/results/$TASK/$SOURCE/$gaze_mtl_task
 else
-    LOG_PTH=/media/nvme_data/observational_miccai_07_2021/$TASK/$SOURCE
+    LOG_PTH=/home/ksaab/Documents/observational/results/$TASK/$SOURCE
 fi
 
-for seed in 101 102 103 104 105 106 107 108 109 110
+for seed in 0 #101 102 103 104 105 106 107 108 109 110
 do
     python train_emmental.py \
         --source $SOURCE  \
