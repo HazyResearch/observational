@@ -8,7 +8,7 @@ Khaled Saab, Sarah Hooper, Nimit Sohoni, Jupinder Parmar, Brian Pogatchnik, Sen 
 
 ## Datasets
 
-- CXR-P: Detecting pneumothorax from chest X-Rays. Download the dataset from the SIIM-ACR Pneumothorax Segmentation [challenge](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/data).
+- CXR-P: Detecting pneumothorax from chest X-Rays. Download the dataset from the stage-1 SIIM-ACR Pneumothorax Segmentation challenge ([official link](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/data), [second link](https://www.kaggle.com/seesee/siim-train-test)).
 - CXR-A: Detecting abnormalities from chest X-Rays. Download the dataset from the "Eye Gaze Data for Chest X-rays" paper on [PhysioNet](https://physionet.org/content/egd-cxr/1.0.0/).
 - METS: Detecting metastases in brain MRI slices. We are currently working on the necessary PHI protocols within our hospital to make this dataset public.
 

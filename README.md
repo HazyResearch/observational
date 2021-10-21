@@ -39,7 +39,7 @@ We release our gaze data on our two novel datasets for CXR-P and METS.
 
 ### Images
 
-- CXR-P: Download the dataset from the SIIM-ACR Pneumothorax Segmentation [challenge](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/data).
+- CXR-P: Download the dataset from the stage-1 SIIM-ACR Pneumothorax Segmentation challenge ([official link](https://www.kaggle.com/c/siim-acr-pneumothorax-segmentation/data), [second link](https://www.kaggle.com/seesee/siim-train-test)).
 - CXR-A: Download the dataset from the "Eye Gaze Data for Chest X-rays" paper on [PhysioNet](https://physionet.org/content/egd-cxr/1.0.0/).
 - METS: We are currently working on the necessary PHI protocols within our hospital to make this dataset public.
 
@@ -53,7 +53,20 @@ Gaze data for the three datasets, with a visualization demo and README, can be f
   CXR: /dfs/scratch1/ksaab/data/4tb_hdd/CXR/dicom_images    
   Mets: PHI   -->
 
+## Citation
 
+If you use this codebase, or otherwise found our work valuable, please cite:
+
+```
+@inproceedings{saab2021observational,
+  title={Observational Supervision for Medical Image Classification Using Gaze Data},
+  author={Saab, Khaled and Hooper, Sarah M and Sohoni, Nimit S and Parmar, Jupinder and Pogatchnik, Brian and Wu, Sen and Dunnmon, Jared A and Zhang, Hongyang R and Rubin, Daniel and R{\'e}, Christopher},
+  booktitle={International Conference on Medical Image Computing and Computer-Assisted Intervention},
+  pages={603--614},
+  year={2021},
+  organization={Springer}
+}
+```
   
   
 
