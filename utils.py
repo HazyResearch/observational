@@ -179,7 +179,8 @@ def load_gaze_data(
     """
 
     gaze_dict_pth = os.path.join(
-        "./gaze_data",
+        os.getcwd(),
+        'gaze_data',
         source + "_gaze_data.pkl",
     )
 
