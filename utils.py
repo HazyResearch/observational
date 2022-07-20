@@ -1,3 +1,5 @@
+import enum
+from turtle import color
 import numpy as np
 import torch
 import torch.nn as nn
@@ -29,6 +31,7 @@ def load_file_markers(
     train_scale: float,
     val_scale: float,
     seed: int = 0,
+    suffle:bool = False
 ):
     """
     A helper function that fetches image paths and labels
@@ -88,7 +91,8 @@ def load_file_markers(
 
     # shuffle file markers
     np.random.seed(seed)
-    np.random.shuffle(file_markers)
+    if suffle:
+        np.random.shuffle(file_markers)
 
     return file_markers
 
@@ -200,7 +204,6 @@ def load_gaze_data(
         file_markers = load_file_markers(
             source, split_type, train_scale, val_scale, seed
         )
-
     gaze_seqs = []
     labels = []
     gaze_ids = []
@@ -231,9 +234,42 @@ def load_gaze_data(
     gaze_ids = np.array(gaze_ids)
 
     print(f"{len(gaze_seqs)} gaze sequences in {split_type} split...")
-
+    
+    import pydicom
+    from matplotlib import pyplot as plt
+    import matplotlib.patches as patches
+    
+    keys = list(gaze_dict_all.keys()) 
+    # print(gaze_dict_all[keys[0]]
+    filename = os.path.join('gaze_data/dicom-images-train', img_pths[0])
+    d = pydicom.read_file(filename)
+    fig, ax = plt.subplots(1) 
+    ax.imshow(d.pixel_array, cmap='gray')
+    for value in gaze_dict_all[img_pths[0]]:
+        print(value)
+    xy = tuple(tuple(d.pixel_array.shape[i] * val for i,val in enumerate(value[0:2])) for value in gaze_dict_all[img_pths[0]] if value[2]>=2)
+    #xy = tuple(tuple(d.pixel_array.shape[i] * val for i,val in enumerate(value[0:2])) for value in gaze_dict_all[img_pths[0]])
+    #print(xy)
+    #p = patches.Polygon(xy, closed=False, )
+    #ax.add_patch(p)
+    #plt.scatter(xy[0], xy[1], s=100, alpha=0.7)
+    mag = 0.9/len(xy)
+    for i, val in enumerate(xy):
+        color=(1.0 - mag * i,1.0 - mag * i,1.0 - mag * i)
+        #color=(0, 0,0, 1.0 - mag * i)
+        c = patches.Circle(xy=val, radius=10, fc=color)
+        ax.add_patch(c)
+        #plt.annotate('', xy=xy[i + 1],xytext=xy[i], color='r',
+        #                        arrowprops=dict(arrowstyle='-',color='black'))
+        #plt.annotate(str(i+1), xy=xy[i + 1],xytext=xy[i], color='r',
+        #                        arrowprops=dict(shrink=0, width=1, headwidth=8, 
+        #                        headlength=2, connectionstyle='arc3',))
+        #p = patches.Polygon(xy, closed=False, )
+        #p = patches.Polygon(xy, closed=False, )
+    plt.axis('off')
+    plt.show()
     if return_img_pths:
-        return gaze_seqs, labels, img_pths
+        return gaze_seqs, labels, img_pths, filename
     return gaze_seqs, labels, gaze_ids
 
 
