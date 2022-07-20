@@ -1,4 +1,4 @@
-git+git://github.com/senwu/emmental.git@a7c2f8c1be64ef69b3ffe7d195405c47f5e22dfc
+# git+git://github.com/conda @a7c2f8c1be64ef69b3ffe7d195405c47f5e22dfc
 imageio
 opencv-python
 jupyter
