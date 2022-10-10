@@ -193,6 +193,7 @@ def load_gaze_data(
         gaze_dict_all = pickle.load(pkl_f)
 
     # load file markers for split to know which gaze sequences to return
+    print('key:{}'.format(len(gaze_dict_all.keys())))
     if split_type == "all":
         file_markers = load_file_markers(source, "train", train_scale, val_scale, seed)
         file_markers.extend(
@@ -205,6 +206,7 @@ def load_gaze_data(
         file_markers = load_file_markers(
             source, split_type, train_scale, val_scale, seed
         )
+    print(len(gaze_dict_all))
     gaze_seqs = []
     labels = []
     gaze_ids = []
@@ -270,9 +272,8 @@ def load_gaze_data(
     plt.axis('off')
     plt.show()
     '''
-    filename = ''
     if return_img_pths:
-        return gaze_seqs, labels, img_pths, filename
+        return gaze_seqs, labels, img_pths
     return gaze_seqs, labels, gaze_ids
 
 
