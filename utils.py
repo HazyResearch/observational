@@ -1,4 +1,5 @@
 import enum
+from fileinput import filename
 from turtle import color
 import numpy as np
 import torch
@@ -238,7 +239,7 @@ def load_gaze_data(
     import pydicom
     from matplotlib import pyplot as plt
     import matplotlib.patches as patches
-    
+    '''
     keys = list(gaze_dict_all.keys()) 
     # print(gaze_dict_all[keys[0]]
     filename = os.path.join('gaze_data/dicom-images-train', img_pths[0])
@@ -268,6 +269,8 @@ def load_gaze_data(
         #p = patches.Polygon(xy, closed=False, )
     plt.axis('off')
     plt.show()
+    '''
+    filename = ''
     if return_img_pths:
         return gaze_seqs, labels, img_pths, filename
     return gaze_seqs, labels, gaze_ids
