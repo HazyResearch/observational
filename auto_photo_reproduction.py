@@ -1,52 +1,50 @@
 # -*- coding: utf-8 -*-
 import sys
 import os
-import tkinter
+import pygame
+from pygame.locals import *
 import datetime
-from PIL import Image, ImageTk
+from PIL import Image
 import csv
 
-root = tkinter.Tk()
-root.title("犬を見る")
-root['bg'] = '#F0F0F0'
-root.state('zoomed')
-height = root.winfo_height()
-width = root.winfo_width()
 
-time = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-csv_file = open(time + '.csv', 'w')
-writer = csv.writer(csv_file)
+def main(screen):
+    pygame.display.set_caption("犬を見る")  
+    screen.fill((230,230,230))
+    pygame.display.update()
+    time = datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    csv_file = open(time + '.csv', 'w')
+    writer = csv.writer(csv_file)
+    filenames = os.listdir('fig')
+    os.chdir('fig')
+    width, height = screen.get_size()
+    
+    isEnd = True
+    while isEnd:        
+        for filename in filenames:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == KEYDOWN:  # キーを押したとき
+                    # ESCキーならスクリプトを終了
+                    if event.key == K_ESCAPE:
+                        pygame.quit()
+                        sys.exit()
+            img = Image.open(filename)
+            x, y = img.size
+            mag = float(height) / y
+            img = pygame.image.load(filename)
+            img = pygame.transform.scale(img, (int(x * mag), int(y * mag)))
+            time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
+            writer.writerow([time, filename])
+            screen.blit(img, ((width - int(x * mag))/ 2 , (height - int(y * mag))/ 2))
+            pygame.display.update()
+            pygame.time.wait(7000)
+        else:
+            isEnd = False
 
-
-def display_photo():
-    global num, canvas, root, img, csv_file, writer
-    if num >= len(filenames):
-        canvas.delete("all")
-        csv_file.close()
-        sys.exit()
-        
-    filename = filenames[num]
-    num += 1
-    # print(filename)
-    # リサイズ
-    img = Image.open(filename)
-    x, y = img.size
-    #longer = x if x > y else y
-    mag = float(height) / y
-    img = img.resize((int(x * mag), int(y * mag)))
-    img = ImageTk.PhotoImage(img)
-    canvas.create_image((width - int(x * mag))/ 2 , (height - int(y * mag))/ 2, image=img, anchor=tkinter.NW)
-    time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
-    writer.writerow([time, filename])
-    root.after(100, display_photo)
-
-
-num = 0
-filenames = os.listdir('fig')
-os.chdir('fig')
-canvas = tkinter.Canvas(root, bg="#F0F0F0", height=height, width=width)
-# キャンバス表示
-canvas.place(x=0, y=0)
-
-display_photo()
-root.mainloop()
+if __name__ == '__main__':
+    pygame.init()
+    screen = pygame.display.set_mode()
+    main(screen)
