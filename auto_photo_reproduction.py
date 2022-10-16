@@ -26,11 +26,10 @@ def main(screen):
                 if event.type == QUIT:
                     pygame.quit()
                     sys.exit()
-                if event.type == KEYDOWN:  # キーを押したとき
-                    # ESCキーならスクリプトを終了
-                    if event.key == K_ESCAPE:
-                        pygame.quit()
-                        sys.exit()
+                if event.type == KEYDOWN:  
+                
+                    pygame.quit()
+                    sys.exit()
             img = Image.open(filename)
             x, y = img.size
             mag = float(height) / y
@@ -40,7 +39,7 @@ def main(screen):
             writer.writerow([time, filename])
             screen.blit(img, ((width - int(x * mag))/ 2 , (height - int(y * mag))/ 2))
             pygame.display.update()
-            pygame.time.wait(7000)
+            pygame.time.wait(6000)
         else:
             isEnd = False
 
